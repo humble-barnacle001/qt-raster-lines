@@ -5,11 +5,11 @@ on:
         branches: [main]
         paths:
             [
-                "./**/*.cpp",
-                "./**/*.ui",
-                "./**/*.h",
-                "./**/*.pro",
-                "./**/*.pri",
+                "**/*.cpp",
+                "**/*.ui",
+                "**/*.h",
+                "**/*.pro",
+                "**/*.pri",
                 ".github/workflows/linux.yml"
             ]
     workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
             - name: Create release directory
               run: mkdir release
             - name: Run Qmake
-              run: qmake ${{ github.workspace }}/raster-draw.pro -config release -spec linux-g++
+              run: qmake ${{ github.workspace }}/raster-draw.pro -spec linux-g++ CONFIG+=qtquickcompiler
               working-directory: ./release
             - name: Build Makefile
               run: make Makefile qmake_all
