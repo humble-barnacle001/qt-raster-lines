@@ -10,7 +10,8 @@ on:
                 "**/*.h",
                 "**/*.pro",
                 "**/*.pri",
-                ".github/workflows/linux.yml"
+                ".github/workflows/linux.yml",
+                "linux/*"
             ]
     workflow_dispatch:
 
@@ -47,12 +48,23 @@ jobs:
             - run: ls -lah
             - run: ls -lah ./release
             - run: ldd ./release/raster-draw
+            - run: find {{ github.workspace }}/release \( -name "moc_*" -or -name "*.o" -or -name "*.h" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
 
-            # - run: find {{ github.workspace }}/release \( -name "moc_*" -or -name "*.o" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
+            - run: cp -r {{ github.workspace }}/linux/* ${{ github.workspace }}/release
 
-            # - run: wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-            # - run: chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-            # - run: ./linuxdeployqt-continuous-x86_64.AppImage ${{ github.workspace }}/release/raster-draw -appimage -unsupported-allow-new-glibc
+            - name: Create AppImage
+              working-directory: ./release
+              run: |
+              wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+              chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+              QT_QPA_PLATFORM_PLUGIN_PATH={{ env.QT_PLUGIN_PATH }}
+              ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage -unsupported-allow-new-glibc
+              [[ -f "qt.conf" ]] && cat qt.conf
 
-            # - run: ls -lah ./release
-            # - run: ldd ./release/raster-draw
+            - run: ls -lah ./release
+            - run: ldd ./release/raster-draw
+
+            - name: Upload a Build Artifact
+              uses: actions/upload-artifact@v2.2.4
+              with:
+                  path: "release/Application-x86_64.AppImage"

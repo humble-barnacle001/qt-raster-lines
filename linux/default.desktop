@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Application
+Exec=raster-draw
+Icon=default
+Comment=Simple shape drawn using rasterisation
+Terminal=true
+Categories=Education;
