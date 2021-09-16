@@ -1,7 +1,6 @@
 #include "linesmainwindow.h"
 #include "ui_linesmainwindow.h"
 
-#include <cmath>
 #include <iostream>
 #include <QDate>
 
@@ -43,7 +42,7 @@ void LinesMainWindow::on_draw_button_clicked()
 
 void LinesMainWindow::on_gridWidth_valueChanged(int arg1)
 {
-    qint32 x = ceil(341/2/arg1), dim = 2*arg1*(x-1)-1;
+    qint32 x = std::ceil(341/2/arg1), dim = 2*arg1*(x-1)-1;
     ui->widget->setFixedSize(dim, dim);
     ui->widget_2->setFixedSize(dim, dim);
     emit send_grid_width(arg1);
