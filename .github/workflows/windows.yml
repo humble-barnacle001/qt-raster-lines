@@ -47,7 +47,7 @@ jobs:
             - run: nmake
             - run: dir release
             - run: windeployqt -h
-            - run: windeployqt --verbose 2 ${{ github.workspace }}/release/raster-lines.exe
+            - run: windeployqt --verbose 2 ${{ github.workspace }}/release/raster-draw.exe
             - run: dir
             - run: dir release
             - name: Upload a Build Artifact

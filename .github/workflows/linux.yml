@@ -35,7 +35,7 @@ jobs:
             - name: Create release directory
               run: mkdir release
             - name: Run Qmake
-              run: qmake ${{ github.workspace }}/raster-lines.pro -config release
+              run: qmake ${{ github.workspace }}/raster-draw.pro -config release -spec linux-g++
               working-directory: ./release
             - name: Build Makefile
               run: make Makefile qmake_all
@@ -46,13 +46,13 @@ jobs:
 
             - run: ls -lah
             - run: ls -lah ./release
-            - run: ldd ./release/raster-lines
+            - run: ldd ./release/raster-draw
 
             # - run: find {{ github.workspace }}/release \( -name "moc_*" -or -name "*.o" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
 
             # - run: wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
             # - run: chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-            # - run: ./linuxdeployqt-continuous-x86_64.AppImage ${{ github.workspace }}/release/raster-lines -appimage -unsupported-allow-new-glibc
+            # - run: ./linuxdeployqt-continuous-x86_64.AppImage ${{ github.workspace }}/release/raster-draw -appimage -unsupported-allow-new-glibc
 
             # - run: ls -lah ./release
-            # - run: ldd ./release/raster-lines
+            # - run: ldd ./release/raster-draw
