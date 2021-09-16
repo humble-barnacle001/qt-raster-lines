@@ -53,13 +53,13 @@ jobs:
             - run: cp -r {{ github.workspace }}/linux/* ${{ github.workspace }}/release
 
             - name: Create AppImage
-              working-directory: ./release
               run: |
-              wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-              chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-              QT_QPA_PLATFORM_PLUGIN_PATH={{ env.QT_PLUGIN_PATH }}
-              ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage -unsupported-allow-new-glibc
-              [[ -f "qt.conf" ]] && cat qt.conf
+                  wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+                  chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+                  QT_QPA_PLATFORM_PLUGIN_PATH={{ env.QT_PLUGIN_PATH }}
+                  ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage -unsupported-allow-new-glibc
+                  [[ -f "qt.conf" ]] && cat qt.conf
+              working-directory: ./release
 
             - run: ls -lah ./release
             - run: ldd ./release/raster-draw
