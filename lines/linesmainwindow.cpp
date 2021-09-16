@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QDate>
+#include <cmath>
 
 LinesMainWindow::LinesMainWindow(QWidget *parent)
     : QMainWindow(parent)

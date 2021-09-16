@@ -1,6 +1,7 @@
 #include "graphwidget.h"
 #include "ui_graph.h"
 
+#include <cmath>
 #include <QPainter>
 
 GraphWidget::GraphWidget(QWidget *parent)
