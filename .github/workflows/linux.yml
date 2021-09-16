@@ -36,7 +36,7 @@ jobs:
             - name: Create release directory
               run: mkdir release
             - name: Run Qmake
-              run: qmake ${{ github.workspace }}/raster-draw.pro -spec linux-g++ CONFIG+=qtquickcompiler
+              run: qmake ${{ github.workspace }}/raster-draw.pro -config release -spec linux-g++ CONFIG+=qtquickcompiler
               working-directory: ./release
             - name: Build Makefile
               run: make Makefile qmake_all
@@ -48,9 +48,11 @@ jobs:
             - run: ls -lah
             - run: ls -lah ./release
             - run: ldd ./release/raster-draw
-            - run: find {{ github.workspace }}/release \( -name "moc_*" -or -name "*.o" -or -name "*.h" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
+            - name: Remove unecessary files
+              run: find . \( -name "moc_*" -or -name "*.o" -or -name "*.h" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
 
-            - run: cp -r {{ github.workspace }}/linux/* ${{ github.workspace }}/release
+            - name: Copy Linux specific files
+              run: cp -r {{ github.workspace }}/linux/* ${{ github.workspace }}/release
 
             - name: Create AppImage
               run: |
