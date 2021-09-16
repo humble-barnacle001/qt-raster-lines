@@ -5,11 +5,11 @@ on:
         branches: [main]
         paths:
             [
-                "*.cpp",
-                "*.ui",
-                "*.h",
-                "*.pro",
-                "*.pri",
+                "./**/*.cpp",
+                "./**/*.ui",
+                "./**/*.h",
+                "./**/*.pro",
+                "./**/*.pri",
                 ".github/workflows/windows.yml"
             ]
     workflow_dispatch:
