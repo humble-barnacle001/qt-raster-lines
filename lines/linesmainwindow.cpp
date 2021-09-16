@@ -1,6 +1,7 @@
 #include "linesmainwindow.h"
 #include "ui_linesmainwindow.h"
 
+#include <cmath>
 #include <iostream>
 #include <QDate>
 
