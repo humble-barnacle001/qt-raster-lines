@@ -69,4 +69,4 @@ jobs:
             - name: Upload a Build Artifact
               uses: actions/upload-artifact@v2.2.4
               with:
-                  path: "release/Application-x86_64.AppImage"
+                  path: "release/Application-*-x86_64.AppImage"
