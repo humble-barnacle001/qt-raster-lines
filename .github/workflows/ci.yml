@@ -15,7 +15,7 @@ on:
 
 jobs:
     linux-build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
 
         steps:
             - uses: actions/checkout@v2
@@ -57,7 +57,7 @@ jobs:
                   wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
                   chmod a+x linuxdeployqt-continuous-x86_64.AppImage
                   QT_QPA_PLATFORM_PLUGIN_PATH=${{ env.QT_PLUGIN_PATH }}
-                  ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage -unsupported-allow-new-glibc
+                  ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage
                   [[ -f "qt.conf" ]] && cat qt.conf
               working-directory: ./release
 
