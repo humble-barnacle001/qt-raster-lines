@@ -119,7 +119,7 @@ jobs:
               uses: actions/upload-artifact@v2.2.4
               with:
                   name: windows-build-artifact
-                  path: "release"
+                  path: "release-raster-draw.zip"
 
     release:
         needs: [linux-build, windows-build]
@@ -138,3 +138,12 @@ jobs:
                   mv -v *.AppImage raster-draw-linux.AppImage
                   mv -v *.zip raster-draw-windows.zip
                   ls -lah
+            - uses: "marvinpinto/action-automatic-releases@latest"
+              with:
+                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  automatic_release_tag: "latest"
+                  title: "Automatic release based on ${{ github.sha }}"
+                  prerelease: true
+                  files: |
+                      raster-draw-linux.AppImage
+                      raster-draw-windows.zip
