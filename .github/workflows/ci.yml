@@ -1,4 +1,4 @@
-name: Linux Release CI
+name: CI
 
 on:
     push:
@@ -135,6 +135,6 @@ jobs:
               with:
                   name: linux-build-artifact
             - run: |
-                  mv -v *.appImage raster-draw-linux.appImage
+                  mv -v *.AppImage raster-draw-linux.AppImage
                   mv -v *.zip raster-draw-windows.zip
                   ls -lah
