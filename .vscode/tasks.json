@@ -1,0 +1,107 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "create-build-dir",
+            "type": "shell",
+            "command": "[[ -d '${workspaceFolder}/../build-${workspaceFolderBasename}' ]] || mkdir -p '${workspaceFolder}/../build-${workspaceFolderBasename}'",
+            "group": "none"
+        },
+        {
+            "label": "qmake-Makefile",
+            "type": "shell",
+            "command": "/home/barnacle/Qt/6.1.3/gcc_64/bin/qmake",
+            "args": [
+                "${workspaceFolder}/${workspaceFolderBasename}.pro",
+                "-spec",
+                "linux-g++",
+                "CONFIG+=debug",
+                "CONFIG+=qml_debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../build-${workspaceFolderBasename}"
+            },
+            "group": "none",
+            "dependsOn": [
+                "create-build-dir"
+            ]
+        },
+        {
+            "label": "make-from-Makefile",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "Makefile",
+                "qmake_all"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../build-${workspaceFolderBasename}"
+            },
+            "group": "none",
+            "dependsOn": [
+                "qmake-Makefile"
+            ]
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j4"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../build-${workspaceFolderBasename}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "make-from-Makefile"
+            ],
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            }
+        },
+        {
+            "label": "view",
+            "type": "shell",
+            "command": "./${workspaceFolderBasename}",
+            "args": [
+                "/qt:run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/../build-${workspaceFolderBasename}"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "clear": true
+            }
+        }
+    ]
+}

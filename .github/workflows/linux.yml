@@ -1,0 +1,58 @@
+name: Linux Release CI
+
+on:
+    push:
+        branches: [main]
+        paths:
+            [
+                "*.cpp",
+                "*.ui",
+                "*.h",
+                "*.pro",
+                "*.pri",
+                ".github/workflows/linux.yml"
+            ]
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Cache Qt
+              id: cache-qt
+              uses: actions/cache@v1
+              with:
+                  path: "${{ github.workspace }}/Qt/"
+                  key: ${{ runner.os }}-QtCache-v2
+            - name: Install Qt
+              uses: jurplel/install-qt-action@v2
+              with:
+                  cached: ${{ steps.cache-qt.outputs.cache-hit }}
+                  dir: ${{ github.workspace }}/Qt/
+            - run: qmake --version
+            - name: Create release directory
+              run: mkdir release
+            - name: Run Qmake
+              run: qmake ${{ github.workspace }}/raster-lines.pro -config release
+              working-directory: ./release
+            - name: Build Makefile
+              run: make Makefile qmake_all
+              working-directory: ./release
+            - name: Build from Makefile
+              run: make -j4
+              working-directory: ./release
+
+            - run: ls -lah
+            - run: ls -lah ./release
+            - run: ldd ./release/raster-lines
+
+            # - run: find {{ github.workspace }}/release \( -name "moc_*" -or -name "*.o" -or -name "qrc_*" -or -name "Makefile*" -or -name "*.a" \) -exec rm {} \;
+
+            # - run: wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+            # - run: chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+            # - run: ./linuxdeployqt-continuous-x86_64.AppImage ${{ github.workspace }}/release/raster-lines -appimage -unsupported-allow-new-glibc
+
+            # - run: ls -lah ./release
+            # - run: ldd ./release/raster-lines
