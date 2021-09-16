@@ -4,16 +4,16 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class LinesMainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class LinesMainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    LinesMainWindow(QWidget *parent = nullptr);
+    ~LinesMainWindow();
 
 private slots:
     void on_closeButton_clicked();
@@ -30,6 +30,6 @@ signals:
     void reset_shape();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::LinesMainWindow *ui;
 };
 #endif // MAINWINDOW_H
