@@ -43,7 +43,7 @@ void LinesMainWindow::on_draw_button_clicked()
 
 void LinesMainWindow::on_gridWidth_valueChanged(int arg1)
 {
-    qint32 x = std::ceil(341/2/arg1), dim = 2*arg1*(x-1)-1;
+    qint32 x = std::ceil(351/2/arg1), dim = 2*arg1*(x-1)-1;
     ui->widget->setFixedSize(dim, dim);
     ui->widget_2->setFixedSize(dim, dim);
     emit send_grid_width(arg1);
@@ -52,6 +52,10 @@ void LinesMainWindow::on_gridWidth_valueChanged(int arg1)
 
 void LinesMainWindow::on_resetButton_clicked()
 {
+    ui->x_1->setValue(0);
+    ui->y_1->setValue(0);
+    ui->x_2->setValue(0);
+    ui->y_2->setValue(0);
     emit reset_shape();
 }
 

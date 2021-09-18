@@ -30,7 +30,7 @@ void GraphWidget::paintEvent(QPaintEvent *){
 void GraphWidget::onGridWidthChanged(int w)
 {
     this->grid_width = w;
-    qint32 dim = 2*w*(std::ceil(341/2/w)-1)-1;
+    qint32 dim = 2*w*(std::ceil(351/2/w)-1)-1;
     this->setFixedSize(dim, dim);
     this->repaint();
 }
