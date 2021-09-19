@@ -1,6 +1,8 @@
 #include "linesmainwidget.h"
 #include "ui_linesmainwidget.h"
 
+#include <cmath>
+
 LinesMainWidget::LinesMainWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LinesMainWidget)
