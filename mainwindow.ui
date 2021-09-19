@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>800</width>
+      <height>500</height>
+     </rect>
+    </property>
+    <widget class="LinesMainWidget" name="page"/>
+    <widget class="QWidget" name="page_2"/>
+   </widget>
+   <widget class="QPushButton" name="closeButton">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>10</y>
+      <width>85</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuRaster_Draw">
+    <property name="title">
+     <string>Raster Draw</string>
+    </property>
+    <addaction name="actionLines"/>
+    <addaction name="actionCircles"/>
+    <addaction name="actionEllipses"/>
+   </widget>
+   <widget class="QMenu" name="menu2D_Scan_conversion_polygon_filling">
+    <property name="title">
+     <string>Polygon Filling</string>
+    </property>
+    <addaction name="actionEdge_Fill"/>
+    <addaction name="actionFence_Fill"/>
+   </widget>
+   <widget class="QMenu" name="menu2D_Transformations">
+    <property name="title">
+     <string>2D Transformations</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu2D_Clipping">
+    <property name="title">
+     <string>2D Clipping</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu3D_Graphics">
+    <property name="title">
+     <string>3D Graphics</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuProjection">
+    <property name="title">
+     <string>Projection</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCurves">
+    <property name="title">
+     <string>Curves</string>
+    </property>
+   </widget>
+   <addaction name="menuRaster_Draw"/>
+   <addaction name="menu2D_Scan_conversion_polygon_filling"/>
+   <addaction name="menu2D_Transformations"/>
+   <addaction name="menu2D_Clipping"/>
+   <addaction name="menu3D_Graphics"/>
+   <addaction name="menuProjection"/>
+   <addaction name="menuCurves"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLines">
+   <property name="text">
+    <string>Lines</string>
+   </property>
+  </action>
+  <action name="actionCircles">
+   <property name="text">
+    <string>Circles</string>
+   </property>
+  </action>
+  <action name="actionEllipses">
+   <property name="text">
+    <string>Ellipses</string>
+   </property>
+  </action>
+  <action name="actionEdge_Fill">
+   <property name="text">
+    <string>Edge Fill</string>
+   </property>
+  </action>
+  <action name="actionFence_Fill">
+   <property name="text">
+    <string>Fence Fill</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LinesMainWidget</class>
+   <extends>QWidget</extends>
+   <header>lines/linesmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
