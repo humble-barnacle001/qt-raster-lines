@@ -39,10 +39,10 @@
     <enum>QAbstractSpinBox::PlusMinus</enum>
    </property>
    <property name="minimum">
-    <number>-5</number>
+    <number>-34</number>
    </property>
    <property name="maximum">
-    <number>5</number>
+    <number>34</number>
    </property>
    <property name="stepType">
     <enum>QAbstractSpinBox::DefaultStepType</enum>
@@ -61,10 +61,10 @@
     <enum>QAbstractSpinBox::PlusMinus</enum>
    </property>
    <property name="minimum">
-    <number>-5</number>
+    <number>-34</number>
    </property>
    <property name="maximum">
-    <number>5</number>
+    <number>34</number>
    </property>
    <property name="stepType">
     <enum>QAbstractSpinBox::DefaultStepType</enum>
@@ -96,10 +96,10 @@
     <enum>QAbstractSpinBox::PlusMinus</enum>
    </property>
    <property name="minimum">
-    <number>-5</number>
+    <number>-34</number>
    </property>
    <property name="maximum">
-    <number>5</number>
+    <number>34</number>
    </property>
    <property name="stepType">
     <enum>QAbstractSpinBox::DefaultStepType</enum>
@@ -238,10 +238,10 @@
     <enum>QAbstractSpinBox::PlusMinus</enum>
    </property>
    <property name="minimum">
-    <number>-5</number>
+    <number>-34</number>
    </property>
    <property name="maximum">
-    <number>5</number>
+    <number>34</number>
    </property>
    <property name="stepType">
     <enum>QAbstractSpinBox::DefaultStepType</enum>

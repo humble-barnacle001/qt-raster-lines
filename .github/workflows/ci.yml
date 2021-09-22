@@ -135,8 +135,8 @@ jobs:
               with:
                   name: linux-build-artifact
             - run: |
-                  mv -v *.AppImage raster-draw-linux.AppImage
-                  mv -v *.zip raster-draw-windows.zip
+                  mv -v *.AppImage RasterDraw-Linux-latest-x86_64.AppImage
+                  mv -v *.zip RasterDraw-Windows-X86_64-latest.zip
                   ls -lah
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
@@ -145,5 +145,5 @@ jobs:
                   title: "Automatic release based on ${{ github.sha }}"
                   prerelease: true
                   files: |
-                      raster-draw-linux.AppImage
-                      raster-draw-windows.zip
+                      RasterDraw-Linux-latest-x86_64.AppImage
+                      RasterDraw-Windows-X86_64-latest.zip
