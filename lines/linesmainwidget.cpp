@@ -20,7 +20,7 @@ LinesMainWidget::LinesMainWidget(QWidget *parent) : QWidget(parent),
     connect(this, &LinesMainWidget::send_grid_width, ui->widget_2, &BresenhamWidget::onGridWidthChanged);
 
     connect(this, &LinesMainWidget::reset_shape, ui->widget, &DDAWidget::onResetClicked);
-    connect(this, &LinesMainWidget::reset_shape, ui->widget, &BresenhamWidget::onResetClicked);
+    connect(this, &LinesMainWidget::reset_shape, ui->widget_2, &BresenhamWidget::onResetClicked);
 
     connect(ui->widget, &DDAWidget::send_time, this, &LinesMainWidget::onTimePassed);
     connect(ui->widget_2, &DDAWidget::send_time, this, &LinesMainWidget::onTimePassed);
