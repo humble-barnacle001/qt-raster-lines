@@ -13,11 +13,10 @@ protected:
     virtual void drawLine(QPainter &painter) = 0;
 
 private:
-    void drawShape(QPainter &painter) override { this->drawLine(painter); }
+    void drawShape(QPainter &painter) override;
 
 public slots:
     void onDataPassed(int x1, int y1, int x2, int y2);
-
 };
 
 #endif // LINEGRAPHWIDGET_H

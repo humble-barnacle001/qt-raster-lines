@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
-namespace Ui {
-class LinesMainWidget;
+namespace Ui
+{
+    class LinesMainWidget;
 }
 
 class LinesMainWidget : public QWidget
@@ -21,6 +22,8 @@ private slots:
     void on_gridWidth_valueChanged(int arg1);
 
     void on_resetButton_clicked();
+
+    void onTimePassed(QString name, qint64 t);
 
 signals:
     void send_data(int x1, int y1, int x2, int y2);

@@ -6,7 +6,7 @@
 class BresenhamWidget : public LineGraphWidget
 {
 public:
-    BresenhamWidget(QWidget *parent):LineGraphWidget(parent){}
+    BresenhamWidget(QWidget *parent) : LineGraphWidget(parent) {}
 
 private:
     void drawLine(QPainter &qp) override;

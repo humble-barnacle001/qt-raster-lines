@@ -136,7 +136,7 @@ jobs:
                   name: linux-build-artifact
             - run: |
                   mv -v *.AppImage RasterDraw-Linux-latest-x86_64.AppImage
-                  mv -v *.zip RasterDraw-Windows-X86_64-latest.zip
+                  mv -v *.zip RasterDraw-Windows-x86_64-latest.zip
                   ls -lah
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
@@ -146,4 +146,4 @@ jobs:
                   prerelease: true
                   files: |
                       RasterDraw-Linux-latest-x86_64.AppImage
-                      RasterDraw-Windows-X86_64-latest.zip
+                      RasterDraw-Windows-x86_64-latest.zip

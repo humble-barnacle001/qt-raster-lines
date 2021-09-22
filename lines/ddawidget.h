@@ -6,12 +6,10 @@
 class DDAWidget : public LineGraphWidget
 {
 public:
-    DDAWidget(QWidget *parent):LineGraphWidget(parent){}
+    DDAWidget(QWidget *parent) : LineGraphWidget(parent) {}
 
 private:
     void drawLine(QPainter &qp) override;
-
 };
 
 #endif // DDAWIDGET_H
-

@@ -4,24 +4,26 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Graph; }
+namespace Ui
+{
+    class Graph;
+}
 QT_END_NAMESPACE
-
 
 class GraphWidget : public QWidget
 {
     Q_OBJECT
 public:
-   GraphWidget(QWidget *parent = nullptr);
-   ~GraphWidget();
+    GraphWidget(QWidget *parent = nullptr);
+    ~GraphWidget();
 
 protected:
-   bool m_shape;
-   QPoint resolveCoordinates(qreal x, qreal y);
-   void paintEvent(QPaintEvent *) override;
-   void drawGraph(QPainter &painter);
-   void drawPoint(QPainter &qp, const QPoint &gc,const QPoint &point, const QColor &fillCol);
-   virtual void drawShape(QPainter & painter) = 0;
+    bool m_shape;
+    QPoint resolveCoordinates(qreal x, qreal y);
+    void paintEvent(QPaintEvent *) override;
+    void drawGraph(QPainter &painter);
+    void drawPoint(QPainter &qp, const QPoint &point, const QColor &fillCol);
+    virtual void drawShape(QPainter &painter) = 0;
 
 private:
     Ui::Graph *ui;
@@ -31,6 +33,8 @@ public slots:
     void onGridWidthChanged(int w);
     void onResetClicked();
 
+signals:
+    void send_time(QString name, qint64 t);
 };
 
 #endif // GRAPHWIDGET_H

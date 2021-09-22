@@ -4,5 +4,5 @@
 
 void BresenhamWidget::drawLine(QPainter &)
 {
-//    TODO: Draw line using Bresenham's here
+    //    TODO: Draw line using Bresenham's here
 }
