@@ -20,6 +20,7 @@ public:
 protected:
     bool m_shape;
     QPoint resolveCoordinates(qreal x, qreal y);
+    QPoint resolvePoint(const QPoint &pos);
     void paintEvent(QPaintEvent *) override;
     void drawGraph(QPainter &painter);
     void drawPoint(QPainter &qp, const QPoint &point, const QColor &fillCol);
@@ -28,6 +29,7 @@ protected:
 private:
     Ui::Graph *ui;
     qint32 grid_width;
+    void mouseMoveEvent(QMouseEvent * event) override;
 
 public slots:
     void onGridWidthChanged(int w);

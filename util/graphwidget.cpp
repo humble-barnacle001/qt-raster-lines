@@ -3,11 +3,13 @@
 
 #include <cmath>
 #include <QPainter>
+#include <QMouseEvent>
 
 GraphWidget::GraphWidget(QWidget *parent)
     : QWidget(parent), m_shape(false), ui(new Ui::Graph), grid_width(5)
 {
     ui->setupUi(this);
+    this->setMouseTracking(true);
 }
 
 GraphWidget::~GraphWidget()
@@ -22,6 +24,11 @@ void GraphWidget::paintEvent(QPaintEvent *)
     if (m_shape)
         this->drawShape(painter);
     painter.end();
+}
+
+void GraphWidget::mouseMoveEvent(QMouseEvent *event){
+    QPoint gc= resolvePoint(event->pos());
+    this->setToolTip(QString::asprintf("%d, %d", gc.x(), gc.y()));
 }
 
 void GraphWidget::onGridWidthChanged(int w)
@@ -41,6 +48,11 @@ void GraphWidget::onResetClicked()
 QPoint GraphWidget::resolveCoordinates(qreal x, qreal y)
 {
     return QPoint(x + this->width() / 2, this->width() / 2 - y);
+}
+
+QPoint GraphWidget::resolvePoint(const QPoint &pos)
+{
+    return QPoint(std::floor(1.0*(pos.x()-this->width() / 2)/this->grid_width), std::floor(1.0*(this->width() / 2 - pos.y())/this->grid_width));
 }
 
 void GraphWidget::drawGraph(QPainter &painter)
