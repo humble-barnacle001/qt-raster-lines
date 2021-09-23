@@ -37,7 +37,7 @@ void BresenhamWidget::drawLine(QPainter &painter)
             else if (-(p << 1) >= dx)
             {
                 y--;
-                p -= dx;
+                p += dx;
             }
             x++;
         }
@@ -70,7 +70,7 @@ void BresenhamWidget::drawLine(QPainter &painter)
             else if (-(p << 1) >= dy)
             {
                 x--;
-                p -= dy;
+                p += dy;
             }
             y++;
         }

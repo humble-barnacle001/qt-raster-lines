@@ -1,6 +1,7 @@
 #include "ddawidget.h"
 
 #include <QPainter>
+#include <cmath>
 
 void DDAWidget::drawLine(QPainter &painter)
 {
@@ -13,7 +14,7 @@ void DDAWidget::drawLine(QPainter &painter)
     qreal x = this->x1, y = this->y1, i = 1;
     while (i <= step + 1)
     {
-        this->drawPoint(painter, QPoint(x, y), penColor);
+        this->drawPoint(painter, QPoint(std::round(x), std::round(y)), penColor);
         x += dx;
         y += dy;
         i++;
