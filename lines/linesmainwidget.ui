@@ -337,6 +337,17 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>gridWidth</tabstop>
+  <tabstop>x_1</tabstop>
+  <tabstop>y_1</tabstop>
+  <tabstop>x_2</tabstop>
+  <tabstop>y_2</tabstop>
+  <tabstop>draw_button</tabstop>
+  <tabstop>resetButton</tabstop>
+  <tabstop>dda_remarks</tabstop>
+  <tabstop>bresenham_remarks</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
