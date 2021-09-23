@@ -2,7 +2,6 @@
 #include "ui_linesmainwidget.h"
 
 #include <cmath>
-#include <QDebug>
 
 LinesMainWidget::LinesMainWidget(QWidget *parent) : QWidget(parent),
                                                     ui(new Ui::LinesMainWidget)
@@ -70,13 +69,11 @@ void LinesMainWidget::onTimePassed(QString name, qint64 t)
 {
     if (name.compare("widget") == 0)
     {
-        qDebug() << "DDA" << t;
         ui->dda_remarks->setPlainText(QString::number(t) + "\u03BCs");
         ui->dda_remarks->show();
     }
     else
     {
-        qDebug() << "Bresenham" << t;
         ui->bresenham_remarks->setPlainText(QString::number(t) + "\u03BCs");
         ui->bresenham_remarks->show();
     }
