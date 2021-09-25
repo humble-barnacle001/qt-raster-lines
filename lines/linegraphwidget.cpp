@@ -14,14 +14,18 @@ void LineGraphWidget::onDataPassed(int x1, int y1, int x2, int y2)
     this->x2 = x2;
     this->y2 = y2;
     this->m_shape = true;
-    this->repaint();
+    this->animateDraw();
 }
 
-void LineGraphWidget::drawShape(QPainter &painter)
+const QList<QPoint> LineGraphWidget::drawShape()
 {
     quint64 t0, t1;
     t0 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    this->drawLine(painter);
+
+    const auto x = this->drawLine();
+
     t1 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     emit send_time(this->objectName(), t1 - t0);
+
+    return x;
 }

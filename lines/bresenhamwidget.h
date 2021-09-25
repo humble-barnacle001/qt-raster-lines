@@ -9,7 +9,7 @@ public:
     BresenhamWidget(QWidget *parent) : LineGraphWidget(parent) {}
 
 private:
-    void drawLine(QPainter &qp) override;
+    const QList<QPoint> drawLine() override;
 };
 
 #endif // BRESENHAMWIDGET_H

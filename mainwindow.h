@@ -18,8 +18,7 @@ public:
 
 private slots:
     void on_closeButton_clicked();
-    void menu_item_clicked(QAction *);
-    //    void menu_hover();
+    void menu_item_clicked(QAction *action);
 
 private:
     Ui::MainWindow *ui;

@@ -4,7 +4,7 @@
 #include <cmath>
 
 LinesMainWidget::LinesMainWidget(QWidget *parent) : QWidget(parent),
-                                                    ui(new Ui::LinesMainWidget)
+                                                    ui(new Ui::LinesMainWidget), d1(1), d2(1)
 {
     ui->setupUi(this);
 
@@ -22,7 +22,10 @@ LinesMainWidget::LinesMainWidget(QWidget *parent) : QWidget(parent),
     connect(this, &LinesMainWidget::reset_shape, ui->widget_2, &BresenhamWidget::onResetClicked);
 
     connect(ui->widget, &DDAWidget::send_time, this, &LinesMainWidget::onTimePassed);
-    connect(ui->widget_2, &DDAWidget::send_time, this, &LinesMainWidget::onTimePassed);
+    connect(ui->widget_2, &BresenhamWidget::send_time, this, &LinesMainWidget::onTimePassed);
+
+    connect(ui->widget, &DDAWidget::set_draw_status, this, &LinesMainWidget::setDrawButtonStatus);
+    connect(ui->widget_2, &BresenhamWidget::set_draw_status, this, &LinesMainWidget::setDrawButtonStatus);
 }
 
 LinesMainWidget::~LinesMainWidget()
@@ -62,19 +65,49 @@ void LinesMainWidget::on_resetButton_clicked()
     ui->y_2->setValue(0);
     ui->dda_remarks->hide();
     ui->bresenham_remarks->hide();
+    ui->draw_button->setEnabled(true);
+    ui->x_1->setEnabled(true);
+    ui->y_1->setEnabled(true);
+    ui->x_2->setEnabled(true);
+    ui->y_2->setEnabled(true);
+    ui->gridWidth->setEnabled(true);
     emit reset_shape();
 }
 
 void LinesMainWidget::onTimePassed(QString name, qint64 t)
 {
     if (name.compare("widget") == 0)
-    {
         ui->dda_remarks->setPlainText(QString::number(t) + "\u03BCs");
+    else
+        ui->bresenham_remarks->setPlainText(QString::number(t) + "\u03BCs");
+}
+
+void LinesMainWidget::setDrawButtonStatus(QString name, bool status)
+{
+    if (name.compare("widget") == 0)
+        d1 = status;
+    else
+        d2 = status;
+    if (d1 && d2)
+    {
+        ui->draw_button->setEnabled(true);
+        ui->x_1->setEnabled(true);
+        ui->y_1->setEnabled(true);
+        ui->x_2->setEnabled(true);
+        ui->y_2->setEnabled(true);
+        ui->gridWidth->setEnabled(true);
         ui->dda_remarks->show();
+        ui->bresenham_remarks->show();
     }
     else
     {
-        ui->bresenham_remarks->setPlainText(QString::number(t) + "\u03BCs");
-        ui->bresenham_remarks->show();
+        ui->draw_button->setEnabled(false);
+        ui->x_1->setEnabled(false);
+        ui->y_1->setEnabled(false);
+        ui->x_2->setEnabled(false);
+        ui->y_2->setEnabled(false);
+        ui->gridWidth->setEnabled(false);
+        ui->dda_remarks->hide();
+        ui->bresenham_remarks->hide();
     }
 }

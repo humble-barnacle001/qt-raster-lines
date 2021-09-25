@@ -24,7 +24,7 @@
      </rect>
     </property>
     <widget class="LinesMainWidget" name="page"/>
-    <widget class="QWidget" name="page_2"/>
+    <widget class="CirclesMainWidget" name="page_2"/>
    </widget>
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
@@ -129,6 +129,12 @@
    <class>LinesMainWidget</class>
    <extends>QWidget</extends>
    <header>lines/linesmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CirclesMainWidget</class>
+   <extends>QWidget</extends>
+   <header>circles/circlesmainwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

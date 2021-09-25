@@ -4,9 +4,11 @@
 #include <cmath>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QTimeLine>
 
-GraphWidget::GraphWidget(QWidget *parent)
-    : QWidget(parent), m_shape(false), ui(new Ui::Graph), grid_width(5)
+GraphWidget::GraphWidget(QWidget *parent, quint8 timer)
+    : QWidget(parent), m_shape(false), curr(-1), anim_timer(timer),
+      ui(new Ui::Graph), grid_width(5)
 {
     ui->setupUi(this);
     this->setMouseTracking(true);
@@ -22,12 +24,24 @@ void GraphWidget::paintEvent(QPaintEvent *)
     QPainter painter(this);
     drawGraph(painter);
     if (m_shape)
-        this->drawShape(painter);
+    {
+        if (curr < points.count())
+        {
+            painter.setBrush(QBrush(QColor(Qt::darkBlue)));
+            for (qsizetype i = 0; i <= curr; i++)
+                this->drawPoint(painter, points.at(i));
+        }
+        if (curr == points.count() - 1)
+        {
+            emit set_draw_status(this->objectName(), true);
+        }
+    }
     painter.end();
 }
 
-void GraphWidget::mouseMoveEvent(QMouseEvent *event){
-    QPoint gc= resolvePoint(event->pos());
+void GraphWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    QPoint gc = resolvePoint(event->pos());
     this->setToolTip(QString::asprintf("%d, %d", gc.x(), gc.y()));
 }
 
@@ -42,6 +56,7 @@ void GraphWidget::onGridWidthChanged(int w)
 void GraphWidget::onResetClicked()
 {
     this->m_shape = false;
+    this->curr = -1;
     this->repaint();
 }
 
@@ -52,7 +67,7 @@ QPoint GraphWidget::resolveCoordinates(qreal x, qreal y)
 
 QPoint GraphWidget::resolvePoint(const QPoint &pos)
 {
-    return QPoint(std::floor(1.0*(pos.x()-this->width() / 2)/this->grid_width), std::floor(1.0*(this->width() / 2 - pos.y())/this->grid_width));
+    return QPoint(std::floor(1.0 * (pos.x() - this->width() / 2) / this->grid_width), std::floor(1.0 * (this->width() / 2 - pos.y()) / this->grid_width));
 }
 
 void GraphWidget::drawGraph(QPainter &painter)
@@ -69,11 +84,27 @@ void GraphWidget::drawGraph(QPainter &painter)
     painter.drawLine(0, this->height() / 2, this->width(), this->height() / 2);
 }
 
-void GraphWidget::drawPoint(QPainter &qp, const QPoint &point, const QColor &fillCol)
+void GraphWidget::drawPoint(QPainter &qp, const QPoint &point)
 {
     qreal cx = point.x(), cy = point.y(), t = this->grid_width;
 
     QPoint rc = resolveCoordinates(cx * t, cy * t + t - 1);
 
-    qp.fillRect(rc.x(), rc.y(), t, t, QBrush(fillCol));
+    qp.fillRect(rc.x(), rc.y(), t, t, qp.brush());
+}
+
+void GraphWidget::animateDraw(const QColor &)
+{
+    this->points = this->drawShape();
+    qsizetype t = this->points.count();
+
+    emit set_draw_status(this->objectName(), false);
+    QTimeLine *tl = new QTimeLine(t * this->anim_timer);
+    tl->setFrameRange(-1, t - 1);
+    connect(tl, &QTimeLine::frameChanged, [this](int frame)
+            {
+                this->curr = frame;
+                this->repaint();
+            });
+    tl->start();
 }

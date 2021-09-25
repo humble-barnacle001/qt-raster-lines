@@ -327,13 +327,13 @@
   <customwidget>
    <class>DDAWidget</class>
    <extends>QWidget</extends>
-   <header>ddawidget.h</header>
+   <header>lines/ddawidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>BresenhamWidget</class>
    <extends>QWidget</extends>
-   <header>bresenhamwidget.h</header>
+   <header>lines/bresenhamwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

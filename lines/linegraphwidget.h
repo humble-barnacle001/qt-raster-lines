@@ -1,7 +1,7 @@
 #ifndef LINEGRAPHWIDGET_H
 #define LINEGRAPHWIDGET_H
 
-#include "graphwidget.h"
+#include "util/graphwidget.h"
 
 class LineGraphWidget : public GraphWidget
 {
@@ -10,10 +10,10 @@ public:
 
 protected:
     qint32 x1, y1, x2, y2;
-    virtual void drawLine(QPainter &painter) = 0;
+    virtual const QList<QPoint> drawLine() = 0;
 
 private:
-    void drawShape(QPainter &painter) override;
+    const QList<QPoint> drawShape() override;
 
 public slots:
     void onDataPassed(int x1, int y1, int x2, int y2);

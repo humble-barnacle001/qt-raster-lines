@@ -25,6 +25,8 @@ private slots:
 
     void onTimePassed(QString name, qint64 t);
 
+    void setDrawButtonStatus(QString name, bool status);
+
 signals:
     void send_data(int x1, int y1, int x2, int y2);
     void send_grid_width(int gw);
@@ -32,6 +34,7 @@ signals:
 
 private:
     Ui::LinesMainWidget *ui;
+    int d1, d2;
 };
 
 #endif // LINESMAINWIDGET_H

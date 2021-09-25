@@ -1,5 +1,3 @@
-include($$PWD/../util/util.pri)
-
 INCLUDEPATH += lines
 
 SOURCES += \

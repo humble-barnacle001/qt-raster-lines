@@ -12,7 +12,9 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp
 
+include($$PWD/util/util.pri)
 include($$PWD/lines/lines.pri)
+include($$PWD/circles/circles.pri)
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

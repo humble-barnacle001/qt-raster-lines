@@ -1,13 +1,11 @@
 #include "bresenhamwidget.h"
 
-#include <QPainter>
 #include <cmath>
 
-void BresenhamWidget::drawLine(QPainter &painter)
+const QList<QPoint> BresenhamWidget::drawLine()
 {
-    QColor penColor(Qt::darkBlue);
-    painter.setPen(penColor);
     int dx = x2 - x1, dy = y2 - y1, x, y, xf, yf, p = 0;
+    QList<QPoint> points;
     if (std::abs(dx) >= std::abs(dy))
     {
         if (x1 <= x2)
@@ -27,7 +25,7 @@ void BresenhamWidget::drawLine(QPainter &painter)
 
         while (x <= xf)
         {
-            this->drawPoint(painter, QPoint(x, y), penColor);
+            points.append(QPoint(x, y));
             p += dy;
             if ((p << 1) >= dx)
             {
@@ -60,7 +58,7 @@ void BresenhamWidget::drawLine(QPainter &painter)
         }
         while (y <= yf)
         {
-            this->drawPoint(painter, QPoint(x, y), penColor);
+            points.append(QPoint(x, y));
             p += dx;
             if ((p << 1) >= dy)
             {
@@ -75,4 +73,5 @@ void BresenhamWidget::drawLine(QPainter &painter)
             y++;
         }
     }
+    return points;
 }
