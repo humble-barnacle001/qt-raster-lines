@@ -17,8 +17,8 @@
    <property name="geometry">
     <rect>
      <x>580</x>
-     <y>150</y>
-     <width>201</width>
+     <y>160</y>
+     <width>210</width>
      <height>29</height>
     </rect>
    </property>
@@ -66,8 +66,8 @@
   <widget class="QSpinBox" name="cx">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>220</y>
+     <x>605</x>
+     <y>250</y>
      <width>90</width>
      <height>40</height>
     </rect>
@@ -79,8 +79,8 @@
   <widget class="QSpinBox" name="cy">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>220</y>
+     <x>695</x>
+     <y>250</y>
      <width>90</width>
      <height>40</height>
     </rect>
@@ -92,8 +92,8 @@
   <widget class="QSpinBox" name="r">
    <property name="geometry">
     <rect>
-     <x>645</x>
-     <y>300</y>
+     <x>650</x>
+     <y>330</y>
      <width>90</width>
      <height>40</height>
     </rect>
@@ -108,8 +108,8 @@
   <widget class="QSpinBox" name="gridWidth">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>80</y>
+     <x>695</x>
+     <y>110</y>
      <width>90</width>
      <height>40</height>
     </rect>
@@ -128,7 +128,7 @@
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>360</y>
+     <y>400</y>
      <width>150</width>
      <height>40</height>
     </rect>
@@ -159,8 +159,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>572</x>
-     <y>90</y>
+     <x>577</x>
+     <y>120</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -172,8 +172,8 @@
   <widget class="QTextEdit" name="timeDisplay">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>10</y>
+     <x>640</x>
+     <y>50</y>
      <width>104</width>
      <height>41</height>
     </rect>
@@ -203,8 +203,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>190</y>
+     <x>665</x>
+     <y>220</y>
      <width>63</width>
      <height>21</height>
     </rect>
@@ -216,14 +216,27 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>270</y>
+     <x>665</x>
+     <y>300</y>
      <width>51</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>Radius</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>10</y>
+     <width>200</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>0</number>
    </property>
   </widget>
  </widget>

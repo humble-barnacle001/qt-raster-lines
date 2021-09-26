@@ -29,6 +29,8 @@ private slots:
 
     void setDrawButtonStatus(QString, bool status);
 
+    void setProgressUpdate(QString, int value);
+
 signals:
     void send_data(qint32 cx, qint32 cy, qint32 r);
     void send_grid_width(int gw);

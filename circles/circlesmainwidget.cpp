@@ -1,33 +1,40 @@
 #include "circlesmainwidget.h"
 #include "ui_circlesmainwidget.h"
 
+#include <cmath>
+
 CirclesMainWidget::CirclesMainWidget(QWidget *parent) : QWidget(parent),
                                                         ui(new Ui::CirclesMainWidget)
 {
     ui->setupUi(this);
 
     ui->timeDisplay->setVisible(false);
+    ui->progressBar->setVisible(false);
 
     connect(this, &CirclesMainWidget::send_grid_width, ui->page_0, &PolarCircleWidget::onGridWidthChanged);
     connect(this, &CirclesMainWidget::reset_shape, ui->page_0, &PolarCircleWidget::onResetClicked);
     connect(this, &CirclesMainWidget::send_data, ui->page_0, &PolarCircleWidget::onDataPassed);
     connect(ui->page_0, &PolarCircleWidget::send_time, this, &CirclesMainWidget::onTimePassed);
     connect(ui->page_0, &PolarCircleWidget::set_draw_status, this, &CirclesMainWidget::setDrawButtonStatus);
+    connect(ui->page_0, &GraphWidget::update_progress, this, &CirclesMainWidget::setProgressUpdate);
 
     connect(this, &CirclesMainWidget::send_grid_width, ui->page_1, &BresenhamMidpointCircleWidget::onGridWidthChanged);
     connect(this, &CirclesMainWidget::reset_shape, ui->page_1, &BresenhamMidpointCircleWidget::onResetClicked);
     connect(ui->page_1, &BresenhamMidpointCircleWidget::send_time, this, &CirclesMainWidget::onTimePassed);
     connect(ui->page_1, &BresenhamMidpointCircleWidget::set_draw_status, this, &CirclesMainWidget::setDrawButtonStatus);
+    connect(ui->page_1, &GraphWidget::update_progress, this, &CirclesMainWidget::setProgressUpdate);
 
     connect(this, &CirclesMainWidget::send_grid_width, ui->page_2, &CartesianCircleWidget::onGridWidthChanged);
     connect(this, &CirclesMainWidget::reset_shape, ui->page_2, &CartesianCircleWidget::onResetClicked);
     connect(ui->page_2, &CartesianCircleWidget::send_time, this, &CirclesMainWidget::onTimePassed);
     connect(ui->page_2, &CartesianCircleWidget::set_draw_status, this, &CirclesMainWidget::setDrawButtonStatus);
+    connect(ui->page_2, &GraphWidget::update_progress, this, &CirclesMainWidget::setProgressUpdate);
 
     connect(this, &CirclesMainWidget::send_grid_width, ui->page_3, &MidpointCircleWidget::onGridWidthChanged);
     connect(this, &CirclesMainWidget::reset_shape, ui->page_3, &MidpointCircleWidget::onResetClicked);
     connect(ui->page_3, &MidpointCircleWidget::send_time, this, &CirclesMainWidget::onTimePassed);
     connect(ui->page_3, &MidpointCircleWidget::set_draw_status, this, &CirclesMainWidget::setDrawButtonStatus);
+    connect(ui->page_3, &GraphWidget::update_progress, this, &CirclesMainWidget::setProgressUpdate);
 }
 
 CirclesMainWidget::~CirclesMainWidget()
@@ -39,6 +46,7 @@ void CirclesMainWidget::on_algoSelector_currentIndexChanged(int index)
 {
     ui->stackedWidget->setCurrentIndex(index);
     ui->timeDisplay->setVisible(false);
+    ui->progressBar->setVisible(false);
     switch (index)
     {
     case 0:
@@ -88,6 +96,7 @@ void CirclesMainWidget::on_gridWidth_valueChanged(int arg1)
 void CirclesMainWidget::on_drawButton_clicked()
 {
     emit send_data(ui->cx->value(), ui->cy->value(), ui->r->value());
+    ui->progressBar->setVisible(true);
 }
 
 void CirclesMainWidget::on_resetButton_clicked()
@@ -102,6 +111,7 @@ void CirclesMainWidget::on_resetButton_clicked()
     ui->algoSelector->setEnabled(true);
     ui->gridWidth->setEnabled(true);
     ui->timeDisplay->setVisible(false);
+    ui->progressBar->setVisible(false);
     emit reset_shape();
 }
 
@@ -119,4 +129,9 @@ void CirclesMainWidget::setDrawButtonStatus(QString, bool status)
     ui->r->setEnabled(status);
     ui->gridWidth->setEnabled(status);
     ui->timeDisplay->setVisible(status);
+}
+
+void CirclesMainWidget::setProgressUpdate(QString, int value)
+{
+    ui->progressBar->setValue(value);
 }
