@@ -14,13 +14,13 @@ class GraphWidget : public QWidget
 {
     Q_OBJECT
 public:
-    GraphWidget(QWidget *parent = nullptr, qsizetype dim = 351, quint8 timer = 100);
+    GraphWidget(QWidget *parent = nullptr, qsizetype dim = 351, quint32 timer = 100);
     ~GraphWidget();
 
 protected:
     bool m_shape;
     qsizetype curr;
-    quint8 anim_timer;
+    quint32 anim_timer;
     QList<QPoint> points;
     QPoint resolveCoordinates(qreal x, qreal y);
     QPoint resolvePoint(const QPoint &pos);
@@ -44,6 +44,7 @@ public slots:
 signals:
     void send_time(QString name, qint64 t);
     void set_draw_status(QString name, bool s);
+    void update_progress(QString name, int value);
 };
 
 #endif // GRAPHWIDGET_H

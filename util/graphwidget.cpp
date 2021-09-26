@@ -6,7 +6,7 @@
 #include <QMouseEvent>
 #include <QTimeLine>
 
-GraphWidget::GraphWidget(QWidget *parent, qsizetype dim, quint8 timer)
+GraphWidget::GraphWidget(QWidget *parent, qsizetype dim, quint32 timer)
     : QWidget(parent), m_shape(false), curr(-1), anim_timer(timer),
       ui(new Ui::Graph), grid_width(5), max_dim(dim), m_signal(true)
 {
@@ -81,8 +81,6 @@ void GraphWidget::drawGraph(QPainter &painter)
         painter.drawLine(0, i, this->width(), i);
     }
     painter.setBrush(QBrush(QColor(Qt::red)));
-    // painter.drawLine(this->width() / 2, 0, this->width() / 2, this->height());
-    // painter.drawLine(0, this->height() / 2, this->width(), this->height() / 2);
     painter.fillRect(this->width() / 2, 0, grid_width, this->height(), painter.brush());
     painter.fillRect(0, this->height() / 2 - grid_width, this->width(), grid_width, painter.brush());
 }
@@ -102,14 +100,16 @@ void GraphWidget::animateDraw(const QColor &)
     qsizetype t = this->points.count();
 
     emit set_draw_status(this->objectName(), false);
+    emit update_progress(this->objectName(), 0);
     m_signal = true;
 
     QTimeLine *tl = new QTimeLine(t * this->anim_timer);
     tl->setFrameRange(-1, t - 1);
-    connect(tl, &QTimeLine::frameChanged, [this](int frame)
+    connect(tl, &QTimeLine::frameChanged, [=](int frame)
             {
                 this->curr = frame;
                 this->repaint();
+                emit update_progress(this->objectName(), (frame+1)*1.0/t*100);
             });
     tl->start();
 }

@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-CircleGraphWidget::CircleGraphWidget(QWidget *parent, qsizetype dim, quint8 timer)
+CircleGraphWidget::CircleGraphWidget(QWidget *parent, qsizetype dim, quint32 timer)
     : GraphWidget(parent, dim, timer),
       cx(0), cy(0), r(0)
 {

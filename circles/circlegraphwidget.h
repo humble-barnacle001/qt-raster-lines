@@ -7,7 +7,7 @@ class CircleGraphWidget : public GraphWidget
 {
 
 public:
-    CircleGraphWidget(QWidget *parent = nullptr, qsizetype dim = 479, quint8 timer = 100);
+    CircleGraphWidget(QWidget *parent = nullptr, qsizetype dim = 479, quint32 timer = 100);
 
 protected:
     qint32 cx, cy, r;
