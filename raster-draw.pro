@@ -20,7 +20,7 @@ include($$PWD/circles/circles.pri)
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-win32 { QMAKE_CXXFLAGS += /FS /source-charset:utf-8 }
+win32 { QMAKE_CXXFLAGS += /FS /utf-8 }
 
 FORMS += \
     mainwindow.ui
