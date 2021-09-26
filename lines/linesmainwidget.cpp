@@ -36,7 +36,6 @@ LinesMainWidget::~LinesMainWidget()
 void LinesMainWidget::on_draw_button_clicked()
 {
     emit send_data(ui->x_1->value(), ui->y_1->value(), ui->x_2->value(), ui->y_2->value());
-    //    this->repaint();
 }
 
 void LinesMainWidget::on_gridWidth_valueChanged(int arg1)
@@ -88,26 +87,13 @@ void LinesMainWidget::setDrawButtonStatus(QString name, bool status)
         d1 = status;
     else
         d2 = status;
-    if (d1 && d2)
-    {
-        ui->draw_button->setEnabled(true);
-        ui->x_1->setEnabled(true);
-        ui->y_1->setEnabled(true);
-        ui->x_2->setEnabled(true);
-        ui->y_2->setEnabled(true);
-        ui->gridWidth->setEnabled(true);
-        ui->dda_remarks->show();
-        ui->bresenham_remarks->show();
-    }
-    else
-    {
-        ui->draw_button->setEnabled(false);
-        ui->x_1->setEnabled(false);
-        ui->y_1->setEnabled(false);
-        ui->x_2->setEnabled(false);
-        ui->y_2->setEnabled(false);
-        ui->gridWidth->setEnabled(false);
-        ui->dda_remarks->hide();
-        ui->bresenham_remarks->hide();
-    }
+    bool res = d1 && d2;
+    ui->draw_button->setEnabled(res);
+    ui->x_1->setEnabled(res);
+    ui->y_1->setEnabled(res);
+    ui->x_2->setEnabled(res);
+    ui->y_2->setEnabled(res);
+    ui->gridWidth->setEnabled(res);
+    ui->dda_remarks->setVisible(res);
+    ui->bresenham_remarks->setVisible(res);
 }
