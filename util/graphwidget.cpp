@@ -6,9 +6,9 @@
 #include <QMouseEvent>
 #include <QTimeLine>
 
-GraphWidget::GraphWidget(QWidget *parent, quint8 timer)
+GraphWidget::GraphWidget(QWidget *parent, qsizetype dim, quint8 timer)
     : QWidget(parent), m_shape(false), curr(-1), anim_timer(timer),
-      ui(new Ui::Graph), grid_width(5)
+      ui(new Ui::Graph), grid_width(5), max_dim(dim), m_signal(true)
 {
     ui->setupUi(this);
     this->setMouseTracking(true);
@@ -31,8 +31,9 @@ void GraphWidget::paintEvent(QPaintEvent *)
             for (qsizetype i = 0; i <= curr; i++)
                 this->drawPoint(painter, points.at(i));
         }
-        if (curr == points.count() - 1)
+        if (curr == points.count() - 1 && m_signal)
         {
+            m_signal = false;
             emit set_draw_status(this->objectName(), true);
         }
     }
@@ -48,7 +49,7 @@ void GraphWidget::mouseMoveEvent(QMouseEvent *event)
 void GraphWidget::onGridWidthChanged(int w)
 {
     this->grid_width = w;
-    qint32 dim = 2 * w * (std::ceil(351 / 2 / w) - 1) - 1;
+    qint32 dim = 2 * w * (std::ceil(max_dim / 2 / w) - 1) - 1;
     this->setFixedSize(dim, dim);
     this->repaint();
 }
@@ -79,9 +80,11 @@ void GraphWidget::drawGraph(QPainter &painter)
         painter.drawLine(i, 0, i, this->height());
         painter.drawLine(0, i, this->width(), i);
     }
-    painter.setPen(QColor(Qt::red));
-    painter.drawLine(this->width() / 2, 0, this->width() / 2, this->height());
-    painter.drawLine(0, this->height() / 2, this->width(), this->height() / 2);
+    painter.setBrush(QBrush(QColor(Qt::red)));
+    // painter.drawLine(this->width() / 2, 0, this->width() / 2, this->height());
+    // painter.drawLine(0, this->height() / 2, this->width(), this->height() / 2);
+    painter.fillRect(this->width() / 2, 0, grid_width, this->height(), painter.brush());
+    painter.fillRect(0, this->height() / 2 - grid_width, this->width(), grid_width, painter.brush());
 }
 
 void GraphWidget::drawPoint(QPainter &qp, const QPoint &point)
@@ -99,6 +102,8 @@ void GraphWidget::animateDraw(const QColor &)
     qsizetype t = this->points.count();
 
     emit set_draw_status(this->objectName(), false);
+    m_signal = true;
+
     QTimeLine *tl = new QTimeLine(t * this->anim_timer);
     tl->setFrameRange(-1, t - 1);
     connect(tl, &QTimeLine::frameChanged, [this](int frame)

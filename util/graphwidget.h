@@ -14,7 +14,7 @@ class GraphWidget : public QWidget
 {
     Q_OBJECT
 public:
-    GraphWidget(QWidget *parent = nullptr, quint8 timer = 100);
+    GraphWidget(QWidget *parent = nullptr, qsizetype dim = 351, quint8 timer = 100);
     ~GraphWidget();
 
 protected:
@@ -32,6 +32,8 @@ protected:
 private:
     Ui::Graph *ui;
     qint32 grid_width;
+    qsizetype max_dim;
+    bool m_signal;
     void paintEvent(QPaintEvent *) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 

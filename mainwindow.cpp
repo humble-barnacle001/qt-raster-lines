@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(ui->menubar, &QMenuBar::triggered, this, &MainWindow::menu_item_clicked);
 
     // Set defaults
+    ui->stackedWidget->setCurrentIndex(1);
+
     ui->menu2D_Clipping->menuAction()->setVisible(false);
     ui->menu2D_Scan_conversion_polygon_filling->menuAction()->setVisible(false);
     ui->menu2D_Transformations->menuAction()->setVisible(false);
