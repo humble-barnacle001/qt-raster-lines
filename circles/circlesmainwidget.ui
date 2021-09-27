@@ -75,6 +75,12 @@
    <property name="buttonSymbols">
     <enum>QAbstractSpinBox::PlusMinus</enum>
    </property>
+   <property name="minimum">
+    <number>-48</number>
+   </property>
+   <property name="maximum">
+    <number>47</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="cy">
    <property name="geometry">
@@ -87,6 +93,12 @@
    </property>
    <property name="buttonSymbols">
     <enum>QAbstractSpinBox::PlusMinus</enum>
+   </property>
+   <property name="minimum">
+    <number>-48</number>
+   </property>
+   <property name="maximum">
+    <number>47</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="r">
@@ -103,6 +115,9 @@
    </property>
    <property name="minimum">
     <number>1</number>
+   </property>
+   <property name="maximum">
+    <number>47</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="gridWidth">
