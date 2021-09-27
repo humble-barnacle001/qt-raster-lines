@@ -6,6 +6,8 @@
 #include <QMouseEvent>
 #include <QTimeLine>
 
+#include <QDebug>
+
 GraphWidget::GraphWidget(QWidget *parent, qsizetype dim, quint32 timer)
     : QWidget(parent), m_shape(false), curr(-1), anim_timer(timer),
       ui(new Ui::Graph), grid_width(5), max_dim(dim), m_signal(true)
@@ -103,13 +105,15 @@ void GraphWidget::animateDraw(const QColor &)
     emit update_progress(this->objectName(), 0);
     m_signal = true;
 
+    qDebug() << "Points count: " << t;
+
     QTimeLine *tl = new QTimeLine(t * this->anim_timer);
     tl->setFrameRange(-1, t - 1);
     connect(tl, &QTimeLine::frameChanged, [=](int frame)
             {
                 this->curr = frame;
                 this->repaint();
-                emit update_progress(this->objectName(), (frame+1)*1.0/t*100);
+                emit update_progress(this->objectName(), (frame + 1) * 1.0 / t * 100);
             });
     tl->start();
 }
