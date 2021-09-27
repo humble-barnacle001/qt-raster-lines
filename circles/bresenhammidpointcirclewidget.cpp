@@ -16,7 +16,6 @@ const QList<QPoint> BresenhamMidpointCircleWidget::drawCircle()
         else
         {
             d += (x << 2) - (y << 2) + 10;
-            // d += (x << 2) - (y << 2) + 1;
             y--;
         }
         x++;
