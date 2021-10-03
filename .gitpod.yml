@@ -2,6 +2,7 @@ image:
   file: .gitpod.Dockerfile
 ports:
   - port: 6080
+    onOpen: open-preview
 tasks:
   - before: sudo mkdir -p /home/barnacle/Qt && sudo chown -R gitpod:gitpod /home/barnacle
     init:  pip install -U pip && pip install aqtinstall
