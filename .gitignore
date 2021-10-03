@@ -53,3 +53,6 @@ compile_commands.json
 
 .vscode/c_cpp_properties.json
 .vscode/settings.json
+
+#Gitpod files
+aqtinstall.log
