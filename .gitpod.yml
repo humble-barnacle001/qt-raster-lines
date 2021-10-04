@@ -4,8 +4,6 @@ ports:
   - port: 6080
     onOpen: open-preview
 tasks:
-  - before: sudo mkdir -p /home/barnacle/Qt && sudo chown -R gitpod:gitpod /home/barnacle
+  - before: mv raster-draw.pro qt-raster-lines.pro && sudo mkdir -p /home/barnacle/Qt && sudo chown -R gitpod:gitpod /home/barnacle
     init:  pip install -U pip && pip install aqtinstall
     command: aqt install-qt -O /home/barnacle/Qt linux desktop 6.1.3
-  - command: mv raster-draw.pro qt-raster-lines.pro
-  
