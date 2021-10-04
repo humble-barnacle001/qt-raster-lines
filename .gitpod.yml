@@ -5,5 +5,5 @@ ports:
     onOpen: open-preview
 tasks:
   - before: sudo mkdir -p /home/barnacle/Qt && sudo chown -R gitpod:gitpod /home/barnacle && mv raster-draw.pro qt-raster-lines.pro
-    init:  pip install -U pip && pip install aqtinstall
-    command: aqt install-qt -O /home/barnacle/Qt linux desktop 6.1.3
+    init:  pip install -U pip && pip install aqtinstall && aqt install-qt -O /home/barnacle/Qt linux desktop 6.1.3
+    command: git config --global user.email $GIT_COMMITTER_EMAIL
