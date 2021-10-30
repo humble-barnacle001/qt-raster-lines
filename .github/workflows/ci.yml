@@ -30,7 +30,7 @@ jobs:
             #   with:
             #       cached: ${{ steps.cache-qt.outputs.cache-hit }}
             #       dir: ${{ github.workspace }}/Qt/
-              run: sudo apt install qt5-qmake
+              run: sudo apt install qt5-qmake qt5-default
             - run: qmake --version
             - name: Create release directory
               run: mkdir release
