@@ -26,10 +26,11 @@ jobs:
                   path: "${{ github.workspace }}/Qt/"
                   key: ${{ runner.os }}-QtCache-v2
             - name: Install Qt
-              uses: jurplel/install-qt-action@v2
-              with:
-                  cached: ${{ steps.cache-qt.outputs.cache-hit }}
-                  dir: ${{ github.workspace }}/Qt/
+            #   uses: jurplel/install-qt-action@v2
+            #   with:
+            #       cached: ${{ steps.cache-qt.outputs.cache-hit }}
+            #       dir: ${{ github.workspace }}/Qt/
+            - run: sudo apt install qt5-qmake
             - run: qmake --version
             - name: Create release directory
               run: mkdir release
