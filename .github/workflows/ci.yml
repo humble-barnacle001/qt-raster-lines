@@ -24,14 +24,13 @@ jobs:
               uses: actions/cache@v1
               with:
                   path: "${{ github.workspace }}/Qt/"
-                  key: ${{ runner.os }}-QtCache-v2
+                  key: ${{ runner.os }}-QtCache-v6
             - name: Install Qt
-            #   uses: jurplel/install-qt-action@v2
-            #   with:
-            #       cached: ${{ steps.cache-qt.outputs.cache-hit }}
-            #       dir: ${{ github.workspace }}/Qt/
-              run: sudo apt install qt5-qmake qt5-default
-            - run: qmake --version
+              uses: jurplel/install-qt-action@v2
+              with:
+                  version: "6.1.3"
+                  cached: ${{ steps.cache-qt.outputs.cache-hit }}
+                  dir: ${{ github.workspace }}/Qt/
             - name: Create release directory
               run: mkdir release
             - name: Run Qmake
@@ -86,7 +85,7 @@ jobs:
             - name: Install Qt
               uses: jurplel/install-qt-action@v2
               with:
-                  version: "5.15.2"
+                  version: "6.1.3"
                   host: "windows"
                   target: "desktop"
                   arch: "win64_msvc2019_64"
