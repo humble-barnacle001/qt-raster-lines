@@ -9,7 +9,7 @@ on:
             - "**/*.h"
             - "**/*.pro"
             - "**/*.pri"
-            - ".github/workflows/*.yml"
+            - ".github/workflows/ci.yml"
             - "linux/*"
     workflow_dispatch:
 
