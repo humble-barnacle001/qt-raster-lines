@@ -7,8 +7,6 @@ class DDAWidget : public LineGraphWidget
 {
 public:
     DDAWidget(QWidget *parent) : LineGraphWidget(parent) {}
-
-private:
     const QList<QPoint> drawLine() override;
 };
 

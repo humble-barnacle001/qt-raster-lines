@@ -25,13 +25,16 @@ void GraphWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     drawGraph(painter);
+    drawDefaultPoints(painter);
     if (m_shape)
     {
         if (curr < points.count())
         {
-            painter.setBrush(QBrush(QColor(Qt::darkBlue)));
             for (qsizetype i = 0; i <= curr; i++)
-                this->drawPoint(painter, points.at(i));
+            {
+                painter.setBrush(QBrush(points.at(i).second));
+                this->drawPoint(painter, points.at(i).first);
+            }
         }
         if (curr == points.count() - 1 && m_signal)
         {
@@ -48,6 +51,11 @@ void GraphWidget::mouseMoveEvent(QMouseEvent *event)
     this->setToolTip(QString::asprintf("%d, %d", gc.x(), gc.y()));
 }
 
+void GraphWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    emit mouse_dbl_clicked(resolvePoint(event->pos()));
+}
+
 void GraphWidget::onGridWidthChanged(int w)
 {
     this->grid_width = w;
@@ -60,6 +68,7 @@ void GraphWidget::onResetClicked()
 {
     this->m_shape = false;
     this->curr = -1;
+    this->removeAllDefaultPoints();
     this->repaint();
 }
 
@@ -73,6 +82,25 @@ QPoint GraphWidget::resolvePoint(const QPoint &pos)
     return QPoint(std::floor(1.0 * (pos.x() - this->width() / 2) / this->grid_width), std::floor(1.0 * (this->width() / 2 - pos.y()) / this->grid_width));
 }
 
+void GraphWidget::removeAllDefaultPoints()
+{
+    defaultPoints = {};
+}
+
+void GraphWidget::drawDefaultPoints(QPainter &painter)
+{
+    foreach (auto x, defaultPoints)
+    {
+        painter.setBrush(QBrush(x.second));
+        this->drawPoint(painter, x.first);
+    }
+}
+
+GraphWidget::CustomPairList::const_iterator GraphWidget::getDefaultPoints()
+{
+    return defaultPoints.constBegin();
+}
+
 void GraphWidget::drawGraph(QPainter &painter)
 {
     painter.setBackgroundMode(Qt::BGMode::OpaqueMode);
@@ -84,7 +112,7 @@ void GraphWidget::drawGraph(QPainter &painter)
     }
     painter.setBrush(QBrush(QColor(Qt::red)));
     painter.fillRect(this->width() / 2, 0, grid_width, this->height(), painter.brush());
-    painter.fillRect(0, this->height() / 2 - grid_width, this->width(), grid_width, painter.brush());
+    painter.fillRect(0, this->height() / 2 - grid_width + 1, this->width(), grid_width, painter.brush());
 }
 
 void GraphWidget::drawPoint(QPainter &qp, const QPoint &point)
@@ -96,7 +124,23 @@ void GraphWidget::drawPoint(QPainter &qp, const QPoint &point)
     qp.fillRect(rc.x(), rc.y(), t, t, qp.brush());
 }
 
-void GraphWidget::animateDraw(const QColor &)
+void GraphWidget::updateDefaultPoints(const GraphWidget::CustomPair &pointColorPair, bool update, bool remove)
+{
+    if (remove && defaultPoints.count() > 0 && defaultPoints.contains(pointColorPair))
+        defaultPoints.removeOne(pointColorPair);
+    else if (!defaultPoints.contains(pointColorPair))
+        defaultPoints.append(pointColorPair);
+    if (update)
+        this->repaint();
+}
+
+void GraphWidget::updateDefaultPoints(const GraphWidget::CustomPairList &list)
+{
+    defaultPoints.append(list);
+    this->repaint();
+}
+
+void GraphWidget::animateDraw()
 {
     this->points = this->drawShape();
     qsizetype t = this->points.count();
@@ -107,7 +151,9 @@ void GraphWidget::animateDraw(const QColor &)
 
     qDebug() << "Points count: " << t;
 
-    QTimeLine *tl = new QTimeLine(t * this->anim_timer);
+    QTimeLine *tl = new QTimeLine(t * this->anim_timer / (t > 1000 ? 100 : t > 100 ? 10
+                                                                                   : 1));
+    // QTimeLine *tl = new QTimeLine(t * this->anim_timer);
     tl->setFrameRange(-1, t - 1);
     connect(tl, &QTimeLine::frameChanged, [=](int frame)
             {
@@ -116,4 +162,9 @@ void GraphWidget::animateDraw(const QColor &)
                 emit update_progress(this->objectName(), (frame + 1) * 1.0 / t * 100);
             });
     tl->start();
+}
+
+qint32 GraphWidget::getGridWidth()
+{
+    return grid_width;
 }

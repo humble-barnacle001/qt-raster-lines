@@ -32,12 +32,15 @@ const QList<QPoint> CircleGraphWidget::eightWaySymmetric(qint32 x, qint32 y)
     return points;
 }
 
-const QList<QPoint> CircleGraphWidget::drawShape()
+const GraphWidget::CustomPairList CircleGraphWidget::drawShape()
 {
     quint64 t0, t1;
     t0 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-    const auto x = this->drawCircle();
+    const auto y = this->drawCircle();
+    GraphWidget::CustomPairList x;
+    for (auto i = 0; i < y.count(); i++)
+        x.append(qMakePair(y.at(i), Qt::darkBlue));
 
     t1 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     emit send_time(this->objectName(), t1 - t0);

@@ -15,7 +15,7 @@ protected:
     const QList<QPoint> eightWaySymmetric(qint32 x, qint32 y);
 
 private:
-    const QList<QPoint> drawShape() override;
+    const GraphWidget::CustomPairList drawShape() override;
 
 public slots:
     void onDataPassed(qint32 cx, qint32 cy, qint32 r);

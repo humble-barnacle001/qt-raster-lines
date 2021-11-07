@@ -7,8 +7,6 @@ class BresenhamWidget : public LineGraphWidget
 {
 public:
     BresenhamWidget(QWidget *parent) : LineGraphWidget(parent) {}
-
-private:
     const QList<QPoint> drawLine() override;
 };
 

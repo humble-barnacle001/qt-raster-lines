@@ -13,7 +13,7 @@
             "label": "qmake-Makefile",
             "type": "shell",
             // CHANGE THE QMAKE DIRECTORY AS PER YOURS
-            "command": "/home/barnacle/Qt/6.1.3/gcc_64/bin/qmake",
+            "command": "/home/barnacle/Qt/6.2.1/gcc_64/bin/qmake",
             "args": [
                 "${workspaceFolder}/${workspaceFolderBasename}.pro",
                 "-spec",

@@ -25,6 +25,7 @@
     </property>
     <widget class="LinesMainWidget" name="page"/>
     <widget class="CirclesMainWidget" name="page_2"/>
+    <widget class="PolygonMainWidget" name="page_3"/>
    </widget>
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
@@ -39,6 +40,42 @@
      <string>Close</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>ForbiddenCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -46,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuRaster_Draw">
@@ -61,18 +98,46 @@
     <property name="title">
      <string>Polygon Filling</string>
     </property>
-    <addaction name="actionEdge_Fill"/>
-    <addaction name="actionFence_Fill"/>
+    <widget class="QMenu" name="menuSeed_Fill">
+     <property name="title">
+      <string>Seed Fill</string>
+     </property>
+     <addaction name="actionBoundary_Fill"/>
+     <addaction name="actionFlood_Fill"/>
+    </widget>
+    <addaction name="actionScanLine_Fill"/>
+    <addaction name="menuSeed_Fill"/>
    </widget>
    <widget class="QMenu" name="menu2D_Transformations">
     <property name="title">
      <string>2D Transformations</string>
     </property>
+    <addaction name="actionTranslation"/>
+    <addaction name="actionRotation"/>
+    <addaction name="actionScaling"/>
+    <addaction name="actionShear"/>
    </widget>
    <widget class="QMenu" name="menu2D_Clipping">
     <property name="title">
      <string>2D Clipping</string>
     </property>
+    <widget class="QMenu" name="menuLine_Clipping">
+     <property name="title">
+      <string>Line Clipping</string>
+     </property>
+     <addaction name="actionCohen_Sutherland"/>
+     <addaction name="actionLiang_Barsky"/>
+    </widget>
+    <widget class="QMenu" name="menuPolygon_Clipping">
+     <property name="title">
+      <string>Polygon Clipping</string>
+     </property>
+     <addaction name="actionSutherland_Hodgeman"/>
+     <addaction name="actionWeiler_Atherton"/>
+    </widget>
+    <addaction name="separator"/>
+    <addaction name="menuLine_Clipping"/>
+    <addaction name="menuPolygon_Clipping"/>
    </widget>
    <widget class="QMenu" name="menu3D_Graphics">
     <property name="title">
@@ -113,14 +178,59 @@
     <string>Ellipses</string>
    </property>
   </action>
-  <action name="actionEdge_Fill">
+  <action name="actionScanLine_Fill">
    <property name="text">
-    <string>Edge Fill</string>
+    <string>Scan-line Fill</string>
    </property>
   </action>
-  <action name="actionFence_Fill">
+  <action name="actionBoundary_Fill">
    <property name="text">
-    <string>Fence Fill</string>
+    <string>Boundary Fill</string>
+   </property>
+  </action>
+  <action name="actionFlood_Fill">
+   <property name="text">
+    <string>Flood Fill</string>
+   </property>
+  </action>
+  <action name="actionTranslation">
+   <property name="text">
+    <string>Translation</string>
+   </property>
+  </action>
+  <action name="actionRotation">
+   <property name="text">
+    <string>Rotation</string>
+   </property>
+  </action>
+  <action name="actionScaling">
+   <property name="text">
+    <string>Scaling</string>
+   </property>
+  </action>
+  <action name="actionShear">
+   <property name="text">
+    <string>Shear</string>
+   </property>
+  </action>
+  <action name="actionCohen_Sutherland">
+   <property name="text">
+    <string>Cohen-Sutherland</string>
+   </property>
+  </action>
+  <action name="actionLiang_Barsky">
+   <property name="text">
+    <string>Liang-Barsky</string>
+   </property>
+  </action>
+  <action name="actionSutherland_Hodgeman">
+   <property name="text">
+    <string>Sutherland-Hodgeman</string>
+   </property>
+  </action>
+  <action name="actionWeiler_Atherton">
+   <property name="text">
+    <string>Weiler-Atherton</string>
    </property>
   </action>
  </widget>
@@ -135,6 +245,12 @@
    <class>CirclesMainWidget</class>
    <extends>QWidget</extends>
    <header>circles/circlesmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PolygonMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/polygonmainwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

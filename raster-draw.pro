@@ -15,6 +15,8 @@ SOURCES += \
 include($$PWD/util/util.pri)
 include($$PWD/lines/lines.pri)
 include($$PWD/circles/circles.pri)
+include($$PWD/ellipses/ellipses.pri)
+include($$PWD/polygons/polygons.pri)
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
