@@ -1,6 +1,8 @@
 #include "rotationmainwidget.h"
 #include "ui_rotationmainwidget.h"
 
+#include <cmath>
+
 RotationMainWidget::RotationMainWidget(QWidget *parent) : QWidget(parent),
                                                           ui(new Ui::RotationMainWidget)
 {

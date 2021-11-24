@@ -1,6 +1,8 @@
 #include "shearmainwidget.h"
 #include "ui_shearmainwidget.h"
 
+#include <cmath>
+
 ShearMainWidget::ShearMainWidget(QWidget *parent) : QWidget(parent),
                                                     ui(new Ui::ShearMainWidget)
 {

@@ -1,6 +1,8 @@
 #include "translationmainwidget.h"
 #include "ui_translationmainwidget.h"
 
+#include <cmath>
+
 TranslationMainWidget::TranslationMainWidget(QWidget *parent) : QWidget(parent),
                                                                 ui(new Ui::TranslationMainWidget)
 {

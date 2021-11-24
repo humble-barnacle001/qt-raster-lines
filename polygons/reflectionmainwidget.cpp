@@ -1,6 +1,8 @@
 #include "reflectionmainwidget.h"
 #include "ui_reflectionmainwidget.h"
 
+#include <cmath>
+
 ReflectionMainWidget::ReflectionMainWidget(QWidget *parent) : QWidget(parent),
                                                               ui(new Ui::ReflectionMainWidget)
 {

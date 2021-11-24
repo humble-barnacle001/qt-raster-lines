@@ -32,7 +32,7 @@ void PolygonClipGraphWidget::drawArtifact()
 
         auto t = pv.at(i), t2 = pv.at((i + 1) % pv.count());
         x.setCoordinates(t.x(), t.y(), t2.x(), t2.y());
-        const QVector<QPoint> p = x.drawLine();
+        const QList<QPoint> p = x.drawLine();
         QSet<QPoint> pcpair;
         for (qsizetype i = 0; i < p.size(); i++)
         {
@@ -69,8 +69,8 @@ void PolygonClipGraphWidget::performOperation()
     {
         auto t = pv.at(i), t2 = pv.at((i + 1) % pv.count());
         y.setCoordinates(t.x(), t.y(), t2.x(), t2.y());
-        const QVector<QPoint> p = y.drawLine();
-        QVector<QPoint> tp;
+        const QList<QPoint> p = y.drawLine();
+        QList<QPoint> tp;
         int ct = 0;
         foreach (auto point, p)
         {
@@ -90,7 +90,7 @@ void PolygonClipGraphWidget::performOperation()
     {
         auto t = vpv.at(i), t2 = vpv.at((i + 1) % vpv.count());
         x.setCoordinates(t.x(), t.y(), t2.x(), t2.y());
-        const QVector<QPoint> p = x.drawLine();
+        const List<QPoint> p = x.drawLine();
         vpp.append(p);
     }
     foreach (auto point, vpp)

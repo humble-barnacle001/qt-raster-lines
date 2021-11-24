@@ -1,6 +1,8 @@
 #include "polygonclipmainwidget.h"
 #include "ui_polygonclipmainwidget.h"
 
+#include <cmath>
+
 PolygonClipMainWidget::PolygonClipMainWidget(QWidget *parent) : QWidget(parent),
                                                                 ui(new Ui::PolygonClipMainWidget)
 {

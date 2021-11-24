@@ -1,6 +1,8 @@
 #include "lineclipmainwidget.h"
 #include "ui_lineclipmainwidget.h"
 
+#include <cmath>
+
 LineClipMainWidget::LineClipMainWidget(QWidget *parent) : QWidget(parent),
                                                           ui(new Ui::LineClipMainWidget)
 {

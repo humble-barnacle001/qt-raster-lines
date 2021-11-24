@@ -1,6 +1,8 @@
 #include "polygonmainwidget.h"
 #include "ui_polygonmainwidget.h"
 
+#include <cmath>
+
 PolygonMainWidget::PolygonMainWidget(QWidget *parent) : QWidget(parent),
                                                         ui(new Ui::PolygonMainWidget)
 {

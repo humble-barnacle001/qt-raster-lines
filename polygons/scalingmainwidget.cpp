@@ -1,6 +1,8 @@
 #include "scalingmainwidget.h"
 #include "ui_scalingmainwidget.h"
 
+#include <cmath>
+
 ScalingMainWidget::ScalingMainWidget(QWidget *parent) : QWidget(parent),
                                                         ui(new Ui::ScalingMainWidget)
 {
