@@ -14,9 +14,6 @@ public:
     const GraphWidget::CustomPairList getColoredPixels();
 
 private:
-    BresenhamWidget x;
-    QList<QPoint> selected;
-    QSet<QPoint> polygon;
     qsizetype max;
     bool animatePolygon;
     Qt::GlobalColor polygonColor;
@@ -33,6 +30,9 @@ private:
     void constructPixMap(int w = 5);
 
 protected:
+    BresenhamWidget x;
+    QList<QPoint> selected;
+    QSet<QPoint> polygon;
     const GraphWidget::CustomPairList drawShape() override;
     Qt::GlobalColor getFillColor();
     const QVector<QPair<bool, bool>> *getPixMap();
@@ -51,8 +51,8 @@ protected:
 
 public slots:
     virtual void onPointSelected(const QPoint &p);
-    virtual void drawPolygon();
-    void onResetClicked();
+    virtual void drawPolygon(bool animate = true);
+    virtual void onResetClicked();
     void onGridWidthChanged(int w);
     virtual void selectSeed() {}
 };

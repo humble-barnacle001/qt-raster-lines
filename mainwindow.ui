@@ -26,6 +26,13 @@
     <widget class="LinesMainWidget" name="page"/>
     <widget class="CirclesMainWidget" name="page_2"/>
     <widget class="PolygonMainWidget" name="page_3"/>
+    <widget class="TranslationMainWidget" name="page_4"/>
+    <widget class="RotationMainWidget" name="page_5"/>
+    <widget class="ScalingMainWidget" name="page_6"/>
+    <widget class="ShearMainWidget" name="page_7"/>
+    <widget class="ReflectionMainWidget" name="page_8"/>
+    <widget class="LineClipMainWidget" name="page_9"/>
+    <widget class="PolygonClipMainWidget" name="page_10"/>
    </widget>
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
@@ -116,6 +123,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionRotation"/>
     <addaction name="actionScaling"/>
     <addaction name="actionShear"/>
+    <addaction name="actionReflection"/>
    </widget>
    <widget class="QMenu" name="menu2D_Clipping">
     <property name="title">
@@ -233,6 +241,11 @@ p, li { white-space: pre-wrap; }
     <string>Weiler-Atherton</string>
    </property>
   </action>
+  <action name="actionReflection">
+   <property name="text">
+    <string>Reflection</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -251,6 +264,48 @@ p, li { white-space: pre-wrap; }
    <class>PolygonMainWidget</class>
    <extends>QWidget</extends>
    <header>polygons/polygonmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranslationMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/translationmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RotationMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/rotationmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ScalingMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/scalingmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ShearMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/shearmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ReflectionMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/reflectionmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LineClipMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/lineclipmainwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PolygonClipMainWidget</class>
+   <extends>QWidget</extends>
+   <header>polygons/polygonclipmainwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

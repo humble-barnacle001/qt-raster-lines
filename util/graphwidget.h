@@ -37,6 +37,7 @@ protected:
     void updateDefaultPoints(const GraphWidget::CustomPairList &list);
     void removeAllDefaultPoints();
     qint32 getGridWidth();
+    // void addPointsToDefault();
     virtual const GraphWidget::CustomPairList drawShape() = 0;
 
 private:

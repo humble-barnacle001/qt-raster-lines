@@ -25,7 +25,7 @@ void SeedFillWidget::selectSeed()
     isSeed = true;
 }
 
-void SeedFillWidget::drawPolygon()
+void SeedFillWidget::drawPolygon(bool)
 {
     PolygonGraphWidget::drawPolygon();
     emit set_fillButton_status(false);

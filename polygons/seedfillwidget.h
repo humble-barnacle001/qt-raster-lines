@@ -18,7 +18,7 @@ private:
     GraphWidget::CustomPairList list;
     const GraphWidget::CustomPairList drawShape() override;
     void selectSeed() override;
-    void drawPolygon() override;
+    void drawPolygon(bool) override;
     void onPointSelected(const QPoint &p) override;
     void performOperation() override {}
 };

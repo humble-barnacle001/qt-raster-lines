@@ -14,13 +14,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui->stackedWidget->setCurrentIndex(2);
     ui->textEdit->setText(QString("Scanline Fill"));
 
-    ui->menu2D_Clipping->menuAction()->setVisible(false);
-    ui->menu2D_Transformations->menuAction()->setVisible(false);
+//    ui->menu2D_Clipping->menuAction()->setVisible(false);
     ui->menu3D_Graphics->menuAction()->setVisible(false);
     ui->menuCurves->menuAction()->setVisible(false);
     ui->menuProjection->menuAction()->setVisible(false);
 
     ui->actionEllipses->setVisible(false);
+    ui->actionLiang_Barsky->setVisible(false);
+    ui->actionWeiler_Atherton->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -35,7 +36,7 @@ void MainWindow::on_closeButton_clicked()
 
 void MainWindow::menu_item_clicked(QAction *action)
 {
-    ui->textEdit->setText(    action->text());
+    ui->textEdit->setText(action->text());
     QString actionName = action->objectName();
     QVector<QString> PolygonFill = {"actionScanLine_Fill", "actionBoundary_Fill", "actionFlood_Fill"};
     //    TODO: When changed set appropriate index on click
@@ -48,4 +49,18 @@ void MainWindow::menu_item_clicked(QAction *action)
         ui->stackedWidget->setCurrentIndex(2);
         emit polygon_change_widget(PolygonFill.indexOf(actionName));
     }
+    else if (actionName == "actionTranslation")
+        ui->stackedWidget->setCurrentIndex(3);
+    else if (actionName == "actionRotation")
+        ui->stackedWidget->setCurrentIndex(4);
+    else if (actionName == "actionScaling")
+        ui->stackedWidget->setCurrentIndex(5);
+    else if (actionName == "actionShear")
+        ui->stackedWidget->setCurrentIndex(6);
+    else if (actionName == "actionReflection")
+        ui->stackedWidget->setCurrentIndex(7);
+    else if (actionName == "actionCohen_Sutherland")
+        ui->stackedWidget->setCurrentIndex(8);
+    else if (actionName == "actionSutherland_Hodgeman")
+        ui->stackedWidget->setCurrentIndex(9);
 }

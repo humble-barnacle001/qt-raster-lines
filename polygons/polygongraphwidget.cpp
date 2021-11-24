@@ -6,8 +6,8 @@
 
 PolygonGraphWidget::PolygonGraphWidget(QWidget *parent)
     : GraphWidget(parent, 479),
-      x(nullptr), max(std::ceil(479 / 2 / 5) - 1),
-      animatePolygon(true), polygonColor(Qt::cyan), fillColor(Qt::magenta)
+      max(std::ceil(479 / 2 / 5) - 1),
+      animatePolygon(true), polygonColor(Qt::cyan), fillColor(Qt::magenta), x(nullptr)
 {
     connect(this, &GraphWidget::mouse_dbl_clicked, this, &PolygonGraphWidget::onPointSelected);
 
@@ -24,7 +24,7 @@ void PolygonGraphWidget::onPointSelected(const QPoint &p)
         updateDefaultPoints(qMakePair(point, polygonColor));
 }
 
-void PolygonGraphWidget::drawPolygon()
+void PolygonGraphWidget::drawPolygon(bool animate)
 {
     if (selected.size() < 3)
         return;
@@ -44,7 +44,7 @@ void PolygonGraphWidget::drawPolygon()
             pcpair.insert(point);
             editPixMap(point, qMakePair(false, true));
             GraphWidget::updateDefaultPoints(
-                qMakePair(point, polygonColor), animatePolygon ? true : i == p.size() - 1);
+                qMakePair(point, polygonColor), (animatePolygon && animate) ? true : i == p.size() - 1);
         }
         polygon.unite(pcpair);
     }
@@ -114,7 +114,9 @@ const QVector<QPair<bool, bool>> *PolygonGraphWidget::getPixMap()
 
 void PolygonGraphWidget::editPixMap(const QPoint &p, const QPair<bool, bool> &pair)
 {
-    ((pixelMap.data())[max - p.y() - 1].data())[p.x() + max] = pair;
+    qsizetype r = max - p.y() - 1, c = p.x() + max;
+    if (r >= 0 && r < getPixMapSize() && c >= 0 && c < getPixMapSize())
+        ((pixelMap.data())[r].data())[c] = pair;
 }
 
 const QPoint PolygonGraphWidget::pixMapToPoint(int row, int column)
@@ -151,4 +153,3 @@ const GraphWidget::CustomPairList PolygonGraphWidget::getColoredPixels()
     }
     return temp;
 }
-
