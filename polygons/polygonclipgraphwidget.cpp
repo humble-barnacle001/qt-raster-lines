@@ -90,7 +90,7 @@ void PolygonClipGraphWidget::performOperation()
     {
         auto t = vpv.at(i), t2 = vpv.at((i + 1) % vpv.count());
         x.setCoordinates(t.x(), t.y(), t2.x(), t2.y());
-        const List<QPoint> p = x.drawLine();
+        const QList<QPoint> p = x.drawLine();
         vpp.append(p);
     }
     foreach (auto point, vpp)
