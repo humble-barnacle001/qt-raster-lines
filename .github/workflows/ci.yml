@@ -15,7 +15,7 @@ on:
 
 jobs:
     linux-build:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
 
         steps:
             - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
             - name: Install Qt
               uses: jurplel/install-qt-action@v2
               with:
-                  version: "5.15.2"
+                  version: "6.2.1"
                   cached: ${{ steps.cache-qt.outputs.cache-hit }}
                   dir: ${{ github.workspace }}/Qt/
             - name: Create release directory
@@ -57,7 +57,7 @@ jobs:
                   wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
                   chmod a+x linuxdeployqt-continuous-x86_64.AppImage
                   QT_QPA_PLATFORM_PLUGIN_PATH=${{ env.QT_PLUGIN_PATH }}
-                  ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage
+                  ./linuxdeployqt-continuous-x86_64.AppImage ./raster-draw -appimage -unsupported-allow-new-glibc -unsupported-bundle-everything
                   [[ -f "qt.conf" ]] && cat qt.conf
               working-directory: ./release
 
@@ -85,7 +85,7 @@ jobs:
             - name: Install Qt
               uses: jurplel/install-qt-action@v2
               with:
-                  version: "5.15.2"
+                  version: "6.2.1"
                   host: "windows"
                   target: "desktop"
                   arch: "win64_msvc2019_64"
