@@ -21,7 +21,7 @@ jobs:
             - uses: actions/checkout@v2
             - name: Cache Qt
               id: cache-qt
-              uses: actions/cache@v1
+              uses: actions/cache@v4
               with:
                   path: "${{ github.workspace }}/Qt/"
                   key: ${{ runner.os }}-QtCache-v6
@@ -78,7 +78,7 @@ jobs:
             - uses: ilammy/msvc-dev-cmd@v1
             - name: Cache Qt
               id: cache-qt
-              uses: actions/cache@v1
+              uses: actions/cache@v4
               with:
                   path: "${{ github.workspace }}/qt/"
                   key: ${{ runner.os }}-Qt_cache
