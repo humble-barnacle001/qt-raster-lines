@@ -140,7 +140,7 @@ jobs:
                   ls -lah
             - uses: "marvinpinto/action-automatic-releases@v1.2.1"
               with:
-                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  repo_token: "${{ secrets.PAT_TOKEN }}"
                   automatic_release_tag: "latest"
                   title: "Automatic release based on ${{ github.sha }}"
                   prerelease: true
