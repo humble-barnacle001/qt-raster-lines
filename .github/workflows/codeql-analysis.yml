@@ -54,7 +54,7 @@ jobs:
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v4
       with:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
         dir: ${{ github.workspace }}/Qt/
