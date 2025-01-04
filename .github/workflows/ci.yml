@@ -127,11 +127,11 @@ jobs:
 
         steps:
             - name: Download Windows build artifact
-              uses: actions/download-artifact@v4.1.7
+              uses: actions/download-artifact@v4.1.8
               with:
                   name: windows-build-artifact
             - name: Download Linux build artifact
-              uses: actions/download-artifact@v4.1.7
+              uses: actions/download-artifact@v4.1.8
               with:
                   name: linux-build-artifact
             - run: |
