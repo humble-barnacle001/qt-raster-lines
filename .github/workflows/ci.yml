@@ -65,7 +65,7 @@ jobs:
             - run: ldd ./release/raster-draw
 
             - name: Upload a Build Artifact
-              uses: actions/upload-artifact@v4.5.0
+              uses: actions/upload-artifact@v4.6.0
               with:
                   name: linux-build-artifact
                   path: "release/Application-*-x86_64.AppImage"
@@ -116,7 +116,7 @@ jobs:
             - run: dir
             - run: dir release
             - name: Upload a Build Artifact
-              uses: actions/upload-artifact@v4.5.0
+              uses: actions/upload-artifact@v4.6.0
               with:
                   name: windows-build-artifact
                   path: "release-raster-draw.zip"
